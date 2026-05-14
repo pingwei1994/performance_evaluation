@@ -43,6 +43,7 @@ def plot_confusion_matrix(y_true, y_pred, normalize=False):
 
 def main():
     annotated = pd.read_csv('data/all_annotations.csv')[['report_id', 'standard_drug', 'standard_symptom','final_label']]
+    annotated.dropna(subset=['final_label'], inplace=True)
     predicted = pd.read_csv('data/LLM_df.csv')
     if annotated.duplicated(subset=['report_id', 'standard_drug', 'standard_symptom']).any():
         return 'all_annotations.csv contains duplications'
